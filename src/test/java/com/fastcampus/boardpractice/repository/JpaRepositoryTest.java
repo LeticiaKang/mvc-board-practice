@@ -62,25 +62,26 @@ class JpaRepositoryTest {
     @Test
     void givenTestData_whenUpdating_thenWorksFine() {
         // Given
-        Article article = articleRepository.findById(1L).orElseThrow();
-        String updatedHashtag = "#springboot";
+        Article article = articleRepository.findById(1L).orElseThrow();    // 1번을 가져오는데, 없으면 종료(1번은 무조건 있으니까 findById(1L)사용)
+        String updatedHashtag = "#springboot";  //해시태그를 변경한다
         article.setHashtag(updatedHashtag);
 
         // When
         Article savedArticle = articleRepository.saveAndFlush(article);
+         //* save하고 flush를 하지 않으면 rollback이 되기 때문에 변경점이 없어 update가 일어나지 않는다.
 
         // Then
-        assertThat(savedArticle).hasFieldOrPropertyWithValue("hashtag", updatedHashtag);
+        assertThat(savedArticle).hasFieldOrPropertyWithValue("hashtag", updatedHashtag); //hashtag필드가 updatedHashtag 되었는가
     }
 
-    @DisplayName("delete 테스트")
+    @DisplayName("delete 테스트") //글이 사라질 때, 댓글도 같이 지어지는지
     @Test
     void givenTestData_whenDeleting_thenWorksFine() {
         // Given
-        Article article = articleRepository.findById(1L).orElseThrow();
-        long previousArticleCount = articleRepository.count();
-        long previousArticleCommentCount = articleCommentRepository.count();
-        int deletedCommentsSize = article.getArticleComments().size();
+        Article article = articleRepository.findById(1L).orElseThrow(); //1번 게시글의 댓글의 수
+        long previousArticleCount = articleRepository.count(); //기존 게시글의 수
+        long previousArticleCommentCount = articleCommentRepository.count(); //기존 댓글의 수
+        int deletedCommentsSize = article.getArticleComments().size(); //지워진 댓글의 수
 
         // When
         articleRepository.delete(article);
