@@ -7,6 +7,7 @@ import com.fastcampus.boardpractice.domain.Article;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
@@ -16,6 +17,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("JPA 연결 테스트")
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // 테스트데이터를 따로 불러오지 않고 설정되어 있는 db를 쓴다.
 @Import(JpaConfig.class)
 @DataJpaTest
 class JpaRepositoryTest {
