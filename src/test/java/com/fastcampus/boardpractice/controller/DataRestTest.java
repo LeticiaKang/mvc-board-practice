@@ -1,5 +1,6 @@
 package com.fastcampus.boardpractice.controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
+@Disabled("Spring Data REST 통합테스트는 불필요하므로 제외시킴")
 @DisplayName("Data REST 테스트 - (API 테스트)")
 @Transactional //db에 영향을 주기 때문에 롤백을 시켜야 해서 어노테이션을 사용함. 상대적으로 무거운 테스트라고 할 수 있다.
 @AutoConfigureMockMvc
