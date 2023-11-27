@@ -29,6 +29,8 @@ dependencies {
 	implementation 'org.springframework.data:spring-data-rest-hal-explorer' //rest hal repositories (웹을 이용해 시각적으로 테스트할 수 있게 하기 위함)
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' //서버 사이드를 위한 Thymeleaf
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security' //defaultloginpagegeneratingfilter 페이지를 이미 가지고 있음
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
