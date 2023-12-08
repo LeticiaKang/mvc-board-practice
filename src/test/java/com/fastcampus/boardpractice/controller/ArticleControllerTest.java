@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @DisplayName("View 컨트롤러 - 게시글")
 @Import(SecurityConfig.class) //Security설정이 모두 통과하도록 설정
-@WebMvcTest(ArticleController.class)
+@WebMvcTest(Void.class) //컨트롤러 테스트에서 읽어야 할 컨트롤러 빈이 없음
 class ArticleControllerTest {
 
     private final MockMvc mvc;
