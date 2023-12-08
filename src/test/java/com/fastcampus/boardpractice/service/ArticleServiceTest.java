@@ -28,10 +28,11 @@ import static org.mockito.BDDMockito.*;
 //스프링부트 애플리케이션 띄우는 기능 생략하기 위해 슬라이스 테스트 기능을 사용하지 않음
 // 가벼운 테스트를 만들기 위함. 대신 dependency가 추가되어야 하면 모킹 방식 사용.(mockioto)
 @DisplayName("비즈니스 로직 - 게시글")
-@ExtendWith({MockitoExtension.class})
+@ExtendWith(MockitoExtension.class)
 class ArticleServiceTest {
 
-    @InjectMocks private ArticleService sut; //sut : system under test로 테스트 대상임을 뜻함.
+    @InjectMocks private ArticleService sut;
+
     @Mock private ArticleRepository articleRepository;
 
     @DisplayName("검색어 없이 게시글을 검색하면, 게시글 페이지를 반환한다.")
@@ -56,14 +57,14 @@ class ArticleServiceTest {
         SearchType searchType = SearchType.TITLE;
         String searchKeyword = "title";
         Pageable pageable = Pageable.ofSize(20);
-        given(articleRepository.findByTitle(searchKeyword, pageable)).willReturn(Page.empty());
+        given(articleRepository.findByTitleContaining(searchKeyword, pageable)).willReturn(Page.empty());
 
         // When
         Page<ArticleDto> articles = sut.searchArticles(searchType, searchKeyword, pageable);
 
         // Then
         assertThat(articles).isEmpty();
-        then(articleRepository).should().findByTitle(searchKeyword, pageable);
+        then(articleRepository).should().findByTitleContaining(searchKeyword, pageable);
     }
 
     @DisplayName("게시글을 조회하면, 게시글을 반환한다.")
